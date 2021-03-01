@@ -1,1 +1,1 @@
-# -cloud.DevOps-capstone.project
+# Cloud DevOps Capstone Project (Provisioning and Monitoring)
