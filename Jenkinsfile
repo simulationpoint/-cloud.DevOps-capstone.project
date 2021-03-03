@@ -1,24 +1,5 @@
 // Jesh Amera Mar 01/2021
 
-
-// Powered by Infostretch 
-
-timestamps {
-
-node () {
-
-    stage ('cloud.devops-capstone.project - Checkout') {
-     checkout([$class: 'GitSCM', 
-     branches: [[name: '*/master']], 
-     doGenerateSubmoduleConfigurations: false, 
-     extensions: [], 
-     submoduleCfg: [], 
-     userRemoteConfigs: [[credentialsId: '', 
-     url: 'https://github.com/simulationpoint/cloud.devops-capstone.project']]]) 
-    }
- }
-}
-
 pipeline {
 	agent any
     // config docker hub
@@ -26,21 +7,21 @@ pipeline {
 		DOCKER_HUB_REPO = "211896/gmn_docker_image"
 		CONTAINER_NAME = "gmn_docker_image"
 		REGISTRY_CREDENTIAL = "dockerhub"
-    }
-    // set pull trigger 
-    triggers {
+        }
+        // set pull trigger 
+        triggers {
         pollSCM 'H/4 * * * *'
-    }
-    // slack global notifier
-    stages {
-         stage('slack notification') {
-              steps {
-                  sh 'echo build in progress'
-                  slackSend message: "Jenkins building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-              }
+        }
+        // slack global notifier
+        stages {
+            stage('slack notification') {
+                steps {
+                    sh 'echo build in progress'
+                    slackSend message: "Jenkins building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                 }
+             }
          }
-     }
-    // remove project folder 
+        // remove project folder 
 		stage('clean workspace') {
 			steps {
 				script {   
