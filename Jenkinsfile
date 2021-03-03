@@ -45,11 +45,11 @@ pipeline {
 			steps {
 				script {
                     sh 'cd ~/Desktop/cloud.devops-capstone.project'
-					sh 'docker image build -t $DOCKER_HUB_REPO:latest .'
-					sh 'docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'
+					sh '/usr/local/bin/docker image build -t $DOCKER_HUB_REPO:latest .'
+					sh '/usr/local/bin/docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'
                     docker.withRegistry('', REGISTRY_CREDENTIAL)
-                    sh 'docker push 211896/gmn_docker_image:$BUILD_NUMBER'
-				    sh 'docker push 211896/gmn_docker_image:latest'
+                    sh '/usr/local/bin/docker push 211896/gmn_docker_image:$BUILD_NUMBER'
+				    sh '/usr/local/bin/docker push 211896/gmn_docker_image:latest'
 				}
 			}
 		}
