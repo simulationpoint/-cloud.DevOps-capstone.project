@@ -1,5 +1,24 @@
 // Jesh Amera Mar 01/2021
 
+
+// Powered by Infostretch 
+
+timestamps {
+
+node () {
+
+    stage ('cloud.devops-capstone.project - Checkout') {
+     checkout([$class: 'GitSCM', 
+     branches: [[name: '*/master']], 
+     doGenerateSubmoduleConfigurations: false, 
+     extensions: [], 
+     submoduleCfg: [], 
+     userRemoteConfigs: [[credentialsId: '', 
+     url: 'https://github.com/simulationpoint/cloud.devops-capstone.project']]]) 
+    }
+ }
+}
+
 pipeline {
 	agent any
     // config docker hub
