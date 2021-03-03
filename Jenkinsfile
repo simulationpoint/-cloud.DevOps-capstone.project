@@ -81,9 +81,11 @@ pipeline {
 		}
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('terraform alert center') {
-			script {
+            steps {
+                script {
 				sh 'echo "your flask app deployed successfully"'
 				slackSend message: "flask app deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
 			}
 		}
         // remove elk project folder
