@@ -55,9 +55,11 @@ pipeline {
 		}
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('docker alert center') {
-			script {
+			steps {
+                script {
 				sh 'echo "Docker image got build, and pushed successfully! "'
                 slackSend message: "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
 			}
 		}
         // terraform init, if then, terraform apply		
