@@ -2,24 +2,25 @@
 
 pipeline {
 	agent any
-    // config docker hub
-    environment {
-		DOCKER_HUB_REPO = "211896/gmn_docker_image"
-		CONTAINER_NAME = "gmn_docker_image"
-		REGISTRY_CREDENTIAL = "dockerhub"
+        // config docker hub
+        environment {
+		  DOCKER_HUB_REPO = "211896/gmn_docker_image"
+		  CONTAINER_NAME = "gmn_docker_image"
+		  REGISTRY_CREDENTIAL = "dockerhub"
         }
         // set pull trigger 
         triggers {
-        pollSCM 'H/4 * * * *'
+            pollSCM 'H/4 * * * *'
         }
-        // slack global notifier
-        stages {
-            stage('slack notification') {
-                steps {
-                    sh 'echo build in progress'
-                    slackSend message: "Jenkins building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-                 }
-             }
+    // slack global notifier
+    stages {
+        stage('slack notification') {
+        steps {
+            script {
+            sh 'echo build in progress'
+            slackSend message: "Jenkins building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                }
+            }
          }
         // remove project folder 
 		stage('clean workspace') {
