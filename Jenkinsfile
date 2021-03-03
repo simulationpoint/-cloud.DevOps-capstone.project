@@ -22,7 +22,6 @@ pipeline {
          }
      }
     // remove project folder 
-	stages {
 		stage('clean workspace') {
 			steps {
 				script {   
