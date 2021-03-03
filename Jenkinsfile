@@ -56,17 +56,18 @@ pipeline {
             steps {
                 script {
                     dir('./cloud.devops-capstone.project') {
-                        docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
+                        docker.withRegistry('', REGISTRY_CREDENTIAL) {
                             sh '/usr/local/bin/docker push 211896/gmn_docker_image:$BUILD_NUMBER'
                             sh '/usr/local/bin/docker push 211896/gmn_docker_image:latest'
-                            sh '/usr/local/bin/docker rm -f gmn_docker_image'  
+                            sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
+                            sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NUMBER'  
                         }
                     }
                 }
             }
         }
         // alert/notify via slack, telegram, whatsapp, and email 
-        stage('docker alert center') {
+        stage('image push alert') {
 			steps {
                 script {
 				sh 'echo "Docker image got build! "'
