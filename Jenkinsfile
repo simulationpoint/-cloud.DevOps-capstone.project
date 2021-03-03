@@ -41,19 +41,18 @@ pipeline {
 			}
 		}
         // build docker image, if then, push docker image to docker hub
-        stage('build -> push docker image') {
+        stage('build image') {
 			steps {
 				script {
                     sh 'cd ~/Desktop/cloud.devops-capstone.project'
                     sh '/usr/local/bin/docker login'
 					sh '/usr/local/bin/docker image build -t $DOCKER_HUB_REPO:latest .'
-					sh '/usr/local/bin/docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'
-                    
+					sh '/usr/local/bin/docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'               
 				}
 			}
 		}
-        // push to docker hub
-        stage('docker image -> push') {
+        // push image to docker hub
+        stage('push image -> dockerhub') {
             steps {
                 script {
                     dir('./cloud.devops-capstone.project') {
@@ -70,7 +69,7 @@ pipeline {
         stage('docker alert center') {
 			steps {
                 script {
-				sh 'echo "Docker image got build, and pushed successfully! "'
+				sh 'echo "Docker image got build! "'
                 slackSend message: "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
                 }
 			}
