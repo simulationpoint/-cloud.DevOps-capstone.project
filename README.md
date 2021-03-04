@@ -137,7 +137,7 @@ $ terraform --version
 
 > #### [Project Link](https://github.com/simulationpoint/cloud.devops-capstone.project)
 
-### <span style="color:green"> 👍 made it this far!</span> 
+## <span style="color:green"> 👍 That is all, Thank you!</span> 
 
 ## References
 
