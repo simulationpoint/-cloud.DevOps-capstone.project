@@ -90,6 +90,8 @@ pipeline {
                 }
             }
         }
+    }
+}
 
   //       // terraform init, if then, terraform apply		
 		// stage('tf init -> tf apply') {
@@ -160,4 +162,4 @@ pipeline {
 		// 	}
 		// }
   //   }
-}
+//}
