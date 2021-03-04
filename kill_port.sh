@@ -13,6 +13,10 @@ kill -kill `lsof -t -i tcp:9095`
 kill -kill `lsof -t -i tcp:9099`
 kill -kill `lsof -t -i tcp:7070`
 kill -kill `lsof -t -i tcp:5000`
+kill -kill `lsof -t -i tcp:6000`
+kill -kill `lsof -t -i tcp:8000`
+kill -kill `lsof -t -i tcp:9000`
+kill -kill `lsof -t -i tcp:4000`
 kill -kill `lsof -t -i tcp:8082`
 kill -kill `lsof -t -i tcp:8085`
 kill -kill `lsof -t -i tcp:80`
