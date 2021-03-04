@@ -51,12 +51,8 @@ pipeline {
         // push image to docker hub
         stage('push  dockr image') {
             steps {
-                script {
-                    sh '/usr/local/bin/docker login'        
-                    sh '/usr/local/bin/docker push 211896/gmn_docker_image'
-                    sh '/usr/local/bin/docker push 211896/gmn_docker_image:latest'
-                    sh '/usr/local/bin/docker rmi 211896/gmn_docker_image'
-                    sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'                                             
+                script {       
+                    sh '/usr/local/bin/docker push 211896/gmn_docker_image'                                             
                 }
             }
         }
