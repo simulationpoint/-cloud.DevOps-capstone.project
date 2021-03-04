@@ -17,7 +17,7 @@ pipeline {
         stage('slack notification') {
          steps {
             script {
-                slackSend message: "Jenkins, started building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|open link>)"
+                slackSend message: "Jenkins, started building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
                 }
             }
          }
@@ -34,6 +34,8 @@ pipeline {
 			steps {
 				script{
 					sh 'git clone https://github.com/simulationpoint/cloud.devops-capstone.project.git' 
+                    slackSend message: 
+                    "clone repo successful - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
 				}		
 			}
 		}
@@ -61,7 +63,8 @@ pipeline {
         stage('image push alert') {
 			steps {
                 script {
-                slackSend message: "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|open link>)"
+                slackSend message: 
+                "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
                 }
 			}
 		}
@@ -88,7 +91,7 @@ pipeline {
             steps {
                 script {
 				sh 'echo "your flask app deployed successfully"'
-				slackSend message: "flask app deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|open link>)"
+				slackSend message: "flask app deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
                 }
 			}
 		}
