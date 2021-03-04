@@ -41,20 +41,25 @@ pipeline {
         stage('build image') {
 			steps {
 				script {
+                    dir('./cloud.devops-capstone.project') {
 					sh 'docker image build -t $DOCKER_HUB_REPO:latest .'
-					sh 'docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'             
+					sh 'docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER' 
+                    sh 'docker push 211896/gmn_docker_image'
+                    sh 'docker push 211896/gmn_docker_image:latest'  
+                    }             
 				}
 			}
 		}
-        // push image to docker hub
-        stage('push  docker image') {
-            steps {
-                script {      
-                    sh 'docker push 211896/gmn_docker_image'
-                    sh 'docker push 211896/gmn_docker_image:latest'                                            
-                }
-            }
-        }
+        // // push image to docker hub
+        // stage('push  docker image') {
+        //     steps {
+        //         script {
+        //             sh 'docker login'        
+                                                               
+        //         }
+        //     }
+        // }
+
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('image push alert') {
 			steps {
