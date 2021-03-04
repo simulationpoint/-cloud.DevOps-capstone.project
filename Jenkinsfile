@@ -49,14 +49,14 @@ pipeline {
 			}
 		}
         // push image to docker hub
-        stage('push image -> dockerhub') {
+        stage('push image  dockerhub') {
             steps {
                 script {
                         docker.withRegistry('', REGISTRY_CREDENTIAL) {
                             sh 'docker push 211896/gmn_docker_image'
                             sh 'docker push 211896/gmn_docker_image:latest'
-                            sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
-                            sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NUMBER'  
+                            // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
+                            // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NU->MBER'  
                     }
                 }
             }
