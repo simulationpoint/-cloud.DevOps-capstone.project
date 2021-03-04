@@ -125,7 +125,7 @@ $ terraform --version
 ## Summary
 
 * The challenge was Jenkins crashed for no reason after some plugin install
-* Cloud implementation was great but, `they milk you a lot` ! 
+* Cloud implementation was great but, `expensive` ! 
 * brew uninstall jenkins --force | temporary work and CRASHED AGAIN !! 
 * brew cleanup
 * Result 
@@ -135,8 +135,6 @@ $ terraform --version
 
 > #### [Project Link](https://github.com/simulationpoint/cloud.devops-capstone.project)
 
-## <span style="color:green"> That is all, Thank you!</span> 
-
 ## References
 
 👉 [https://github.com/simulationpoint/dockerized-elk](https://github.com/simulationpoint/dockerized-elk)
@@ -145,10 +143,3 @@ $ terraform --version
 
 👉 [https://github.com/simulationpoint/terraform/tree/main/jesh](https://github.com/simulationpoint/terraform/tree/main/jesh)
 
-
-
-
-
-
-
-   	   
