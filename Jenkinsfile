@@ -17,7 +17,8 @@ pipeline {
         stage('slack notification') {
          steps {
             script {
-                slackSend message: "Jenkins, started building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
+                slackSend message: 
+                         "Jenkins, started building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} | open console output >)"
                 }
             }
          }
@@ -35,7 +36,7 @@ pipeline {
 				script{
 					sh 'git clone https://github.com/simulationpoint/cloud.devops-capstone.project.git' 
                     slackSend message: 
-                    "clone repo successful - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
+                            "clone repo successful - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} | open console output >)"
 				}		
 			}
 		}
@@ -64,7 +65,7 @@ pipeline {
 			steps {
                 script {
                 slackSend message: 
-                "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
+                "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} | open console output >)"
                 }
 			}
 		}
@@ -72,9 +73,10 @@ pipeline {
 		stage('tf init -> tf apply') {
 			steps {
 				script {
-
-                 sh '/usr/local/bin/terraform init'
-  				 sh '/usr/local/bin/terraform apply -auto-approve'
+                    dir('.') {
+                    sh '/usr/local/bin/terraform init'
+  				    sh '/usr/local/bin/terraform apply -auto-approve'
+                    }
 				}
   			}
 		}
@@ -82,16 +84,16 @@ pipeline {
 		stage('get cluster info') {
 				steps {
 					script { 
-						sh 'kubectl get all --all-namespaces'
-					}
-			    }				
+					   sh 'kubectl get all --all-namespaces'
+				  }
+			 }				
 		}
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('terraform alert center') {
             steps {
                 script {
-				sh 'echo "your flask app deployed successfully"'
-				slackSend message: "flask app deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} -> console output >)"
+				slackSend message: 
+                        "flask app deployed successfully using terraform - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} | open console output >)"
                 }
 			}
 		}
@@ -119,6 +121,8 @@ pipeline {
         stage('configure metricbeat') {
             steps {
                 script {
+                slackSend message: 
+                        " docker-compose up and running - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} | open console output >)"
                 sh 'cd ~/Desktop/dockerized-elk-stack/docker-elk'
                 sh 'curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.11.0-darwin-x86_64.tar.gz'
                 sh 'tar xzvf metricbeat-7.11.0-darwin-x86_64.tar.gz'
@@ -129,7 +133,7 @@ pipeline {
                 sh './metricbeat modules enable docker'
                 sh './metricbeat setup'
                 sh './metricbeat -e'
-                sh 'kubectl expose deployment kubernetes_deployment  --type=LoadBalancer --port=8080'
+                sh 'kubectl expose deployment kubernetes_deployment  --type=LoadBalancer --port=9090'
                 }
 			}
 		}
