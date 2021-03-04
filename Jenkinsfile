@@ -64,19 +64,15 @@ pipeline {
         //     }
         // }
 
-        stage('push') {
-            steps {
-             script {
-            //  Building new image
-            
-            //  Pushing Image to Repository
-            docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-                sh '/usr/local/bin/docker push 211896/gmn_docker_image:$BUILD_NUMBER'
-                sh '/usr/local/bin/docker push 211896/gmn_docker_image:latest'
-            }     
-            echo "Image built successfully"
+        // Uploading Docker images into Docker Hub
+        stage('Upload Image') {
+         steps{    
+            script {
+                docker.withRegistry( '', registryCredential ) {
+                CONTAINER_NAME.push()
+                }
+             }
             }
-          }
         }
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('image push alert') {
