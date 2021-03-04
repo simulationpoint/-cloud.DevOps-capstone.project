@@ -118,8 +118,6 @@ $ terraform --version
 
 ![jesh](./src/aws/aws.png)
 
-![jesh](./src/aws/2.png)
-
 ![jesh](./src/aws/1.png)
 
 ![jesh](./src/aws/kube.png)
