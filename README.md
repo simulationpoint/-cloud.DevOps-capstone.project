@@ -97,7 +97,7 @@ $ terraform --version
  
 ### Part 4. Create Kubernetes cluster using terrafrom as provisioner
 
-[Kubernetes](https://github.com/simulationpoint/cloud.devops-capstone.project/blob/main/kubernete.yaml)
+[Kubernetes](https://github.com/simulationpoint/cloud.devops-capstone.project/blob/main/kubernetes.yaml)
   
 ![jesh](./src/kubernetes/kube.png)
 
