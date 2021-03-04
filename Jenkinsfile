@@ -17,7 +17,7 @@ pipeline {
         stage('slack notification') {
          steps {
             script {
-                slackSend message: "Jenkins, started building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                slackSend message: "Jenkins, started building the job - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|open link>)"
                 }
             }
          }
@@ -41,7 +41,7 @@ pipeline {
         stage('build image') {
 			steps {
 				script {
-                    dir('./cloud.devops-capstone.project') {
+                    dir('.') {
 					sh '/usr/local/bin/docker image build -t $DOCKER_HUB_REPO:latest .'
 					sh '/usr/local/bin/docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'  
                     }             
@@ -61,7 +61,7 @@ pipeline {
         stage('image push alert') {
 			steps {
                 script {
-                slackSend message: "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                slackSend message: "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|open link>)"
                 }
 			}
 		}
@@ -69,8 +69,9 @@ pipeline {
 		stage('tf init -> tf apply') {
 			steps {
 				script {
-  					 // sh '/usr/local/bin/terraform apply -auto-approve'
-                     sh 'terraform apply -auto-approve'
+
+                 sh '/usr/local/bin/terraform init'
+  				 sh '/usr/local/bin/terraform apply -auto-approve'
 				}
   			}
 		}
@@ -87,7 +88,7 @@ pipeline {
             steps {
                 script {
 				sh 'echo "your flask app deployed successfully"'
-				slackSend message: "flask app deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+				slackSend message: "flask app deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|open link>)"
                 }
 			}
 		}
