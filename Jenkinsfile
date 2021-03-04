@@ -66,7 +66,7 @@ pipeline {
 
         stage('push') {
             steps {
-            script {
+             script {
             //  Building new image
             
             //  Pushing Image to Repository
