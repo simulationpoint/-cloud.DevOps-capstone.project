@@ -71,7 +71,7 @@ pipeline {
 		}
         stage('kubernetes dploy') {
             steps {
-                dir('./cloud.devops-capstone.project') {
+                dir('.') {
                     script {
                         sh 'kubectl apply -f kubernetes.yaml'
                         sh 'kubectl get service/kube-app-deployment'
@@ -81,7 +81,7 @@ pipeline {
         }
         stage('minikube service') {
             steps {
-                dir('./cloud.devops-capstone.project') {
+                dir('.') {
                     script {
                         sh 'minikube service kubernetes-app-service'
                         slackSend message: 
