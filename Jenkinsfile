@@ -48,30 +48,17 @@ pipeline {
 				}
 			}
 		}
-        // // push image to docker hub
-        // stage('push image -> dockerhub') {
-        //     steps {
-        //         script {
-        //             dir('./cloud.devops-capstone.project') {
-        //                 docker.withRegistry('', REGISTRY_CREDENTIAL) {
-        //                     sh 'docker push 211896/gmn_docker_image'
-        //                     sh 'docker push 211896/gmn_docker_image:latest'
-        //                     // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
-        //                     // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NUMBER'  
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-        // Uploading Docker images into Docker Hub
-        stage('Upload Image') {
-         steps{    
-            script {
-                docker.withRegistry( '', registryCredential ) {
-                CONTAINER_NAME.push()
+        // push image to docker hub
+        stage('push image -> dockerhub') {
+            steps {
+                script {
+                        docker.withRegistry('', REGISTRY_CREDENTIAL) {
+                            sh 'docker push 211896/gmn_docker_image'
+                            sh 'docker push 211896/gmn_docker_image:latest'
+                            sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
+                            sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NUMBER'  
+                    }
                 }
-             }
             }
         }
         // alert/notify via slack, telegram, whatsapp, and email 
