@@ -71,8 +71,8 @@ pipeline {
             
             //  Pushing Image to Repository
             docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-                sh 'docker push 211896/gmn_docker_image:$BUILD_NUMBER'
-                sh 'docker push 211896/gmn_docker_image:latest'
+                sh '/usr/local/bin/docker push 211896/gmn_docker_image:$BUILD_NUMBER'
+                sh '/usr/local/bin/docker push 211896/gmn_docker_image:latest'
             }     
             echo "Image built successfully"
             }
