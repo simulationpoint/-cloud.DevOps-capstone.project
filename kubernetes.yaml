@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: kubernetesapp
-        image: 211896/gmn_docker_image
+        image: 211896/gmn_docker_image0
         ports:
         - containerPort: 9090
 ---

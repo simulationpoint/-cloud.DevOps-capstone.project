@@ -98,17 +98,19 @@ $ terraform --version
 ### Part 4. Create Kubernetes cluster using terrafrom as provisioner
 
 [Kubernetes](https://github.com/simulationpoint/cloud.devops-capstone.project/blob/main/kubernetes.yaml)
-  
-![jesh](./src/kubernetes/kube.png)
 
 ### Part 4. Create dockerized ELK stack to monitor the falsk app
-  
+
+![jesh](./src/elk/elk.png)
+
+![jesh](./src/elk/dock-elk.png)
+
 ![jesh](./src/kubernetes/1.png)
 
 ### Part 5. Configure and integrate slack notification in Jenkins, Kibana
 [Instruction found here](https://github.com/simulationpoint/cloud.devops-capstone.project/blob/main/slack.md)
   
-![jesh](./src/slack/10.png)
+![jesh](./src/slack/00.png)
    
 ## Step 4. Cloud implementation using terraform
 
@@ -125,7 +127,7 @@ $ terraform --version
 ## Summary
 
 * The challenge was Jenkins crashed for no reason after some plugin install
-* Cloud implementation was great but, `they milk you` ! 
+* Cloud implementation was great but, `they milk you a lot` ! 
 * brew uninstall jenkins --force | temporary work and CRASHED AGAIN !! 
 * brew cleanup
 * Result 
@@ -135,7 +137,7 @@ $ terraform --version
 
 > #### [Project Link](https://github.com/simulationpoint/cloud.devops-capstone.project)
 
-### <span style="color:green"> 👍 Congratulations you have made it this far!</span> 
+### <span style="color:green"> 👍 made it this far!</span> 
 
 ## References
 
