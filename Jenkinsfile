@@ -48,26 +48,40 @@ pipeline {
 				}
 			}
 		}
-        // push image to docker hub
-        stage('push image -> dockerhub') {
+        // // push image to docker hub
+        // stage('push image -> dockerhub') {
+        //     steps {
+        //         script {
+        //             dir('./cloud.devops-capstone.project') {
+        //                 docker.withRegistry('', REGISTRY_CREDENTIAL) {
+        //                     sh 'docker push 211896/gmn_docker_image'
+        //                     sh 'docker push 211896/gmn_docker_image:latest'
+        //                     // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
+        //                     // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NUMBER'  
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        stage('push') {
             steps {
-                script {
-                    dir('./cloud.devops-capstone.project') {
-                        docker.withRegistry('', REGISTRY_CREDENTIAL) {
-                            sh 'docker push 211896/gmn_docker_image'
-                            sh 'docker push 211896/gmn_docker_image:latest'
-                            // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
-                            // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NUMBER'  
-                        }
-                    }
-                }
+            script {
+            //  Building new image
+            
+            //  Pushing Image to Repository
+            docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
+                sh 'docker push 211896/gmn_docker_image:$BUILD_NUMBER'
+                sh 'docker push 211896/gmn_docker_image:latest'
+            }     
+            echo "Image built successfully"
             }
+          }
         }
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('image push alert') {
 			steps {
                 script {
-				sh 'echo "Docker image got build! "'
                 slackSend message: "Docker image got build, and pushed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
                 }
 			}
