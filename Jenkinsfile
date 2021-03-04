@@ -48,40 +48,19 @@ pipeline {
 				}
 			}
 		}
-        
-        stage('push  image') {
+        // push image to docker hub
+        stage('push  dockr image') {
             steps {
-                script {                
-                    docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-                        sh 'docker push 211896/gmn_docker_image'
-                        sh 'docker push 211896/gmn_docker_image:latest'                                          
-                    }       
+                script {
+                    // sh '/usr/local/bin/docker login'        
+                    sh '/usr/local/bin/docker push 211896/gmn_docker_image'
+                    sh '/usr/local/bin/docker push 211896/gmn_docker_image:latest'
+                    sh '/usr/local/bin/docker rmi 211896/gmn_docker_image'
+                    sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'                                             
                 }
             }
         }
 
-
-
-
-
-
-
-
-
-
-        // // push image to docker hub
-        // stage('push image  dockerhub') {
-        //     steps {
-        //         script {
-        //                 // docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-        //                 sh 'docker push 211896/gmn_docker_image'
-        //                 sh 'docker push 211896/gmn_docker_image:latest'
-        //                 // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:latest'
-        //                 // sh '/usr/local/bin/docker rmi 211896/gmn_docker_image:$BUILD_NU->MBER'  
-        //             // }
-        //         }
-        //     }
-        // }
         // alert/notify via slack, telegram, whatsapp, and email 
         stage('image push alert') {
 			steps {
