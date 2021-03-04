@@ -73,8 +73,8 @@ pipeline {
             steps {
                 dir('.') {
                     script {
-                        sh 'kubectl apply -f kubernetes.yaml'
-                        sh 'kubectl get service/kube-app-deployment'
+                        sh '/usr/local/bin/kubectl apply -f kubernetes.yaml'
+                        sh '/usr/local/bin/kubectl get service/kube-app-deployment'
                     }
                 }
             }
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 dir('.') {
                     script {
-                        sh 'minikube service kubernetes-app-service'
+                        sh '/usr/local/bin/minikube service kubernetes-app-service'
                         slackSend message: 
                             "kubernetes claster deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL} | open console output >)"
                     }
